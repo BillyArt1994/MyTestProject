@@ -1,11 +1,35 @@
+#include "MeshInstanceCommonInput.hlsl"
+#pragma kernel BuildPatches
 
-#pragma kernel CSMain
+AppendStructuredBuffer<float> CulledPatchList;
+//RWStructuredBuffer<int> testArray1;
 
+//RWTexture2D<float4> Result;
 
-RWTexture2D<float4> Result;
+//
 
-[numthreads(8,8,1)]
-void BuildPatches(uint3 id : SV_DispatchThreadID)
+bool Cull()
 {
-    
+    return false;
+}
+
+RenderPatch CreatePatch(int index)
+{
+    RenderPatch path;
+    path.position = float2(-3008.0f,-3008.0f)+float2((index - ((index % 47) * 47)) / 47 * 128.0f, (index % 47) * 128.0f);
+    return path;
+
+}
+
+
+[numthreads(8,8,8)]
+void BuildPatches(uint3 id : SV_DispatchThreadID, uint3 groupId : SV_GroupID, uint3 groupThreadId : SV_GroupThreadID)
+{
+    int idx = id.x + id.y * 1*8+ id.z*1*8*1*8;
+   //   testArray1[idx] = id.x;
+  //  int index = 
+   //  RenderPatch patch = CreatePatch(idx);
+  //  
+  // if (Cull()) return;
+    CulledPatchList.Append(idx);
 }
