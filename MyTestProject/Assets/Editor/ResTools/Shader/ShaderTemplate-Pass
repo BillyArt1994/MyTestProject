@@ -1,0 +1,16 @@
+        Pass
+        {
+            TAG_HOLDER
+
+            COMMAND_HOLDER
+
+            GLSLPROGRAM
+            #ifdef VERTEX
+            VERT_PROGRAM_HOLDER
+            #endif
+
+            #ifdef FRAGMENT
+            FRAG_PROGRAM_HOLDER
+            #endif
+            ENDGLSL
+        }
